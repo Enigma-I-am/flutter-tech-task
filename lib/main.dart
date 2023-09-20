@@ -1,66 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-void main() => runApp(MyApp());
+import 'package:tech_task/presentation/views/home_page.dart';
+import 'core/service/service.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigator.key,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-          ],
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: Colors.green,
+        brightness: Brightness.light,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.green,
+          selectionHandleColor: Colors.green,
+          selectionColor: Colors.green.withOpacity(0.1),
+        ),
+        useMaterial3: false,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        colorScheme: const ColorScheme.light(
+          primary: Colors.green,
+          background: Colors.white,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      home: const HomePage(),
     );
   }
 }
+
+
+
+
+
+
+
+
